@@ -13,8 +13,10 @@ export interface Pipe0ToolOptions {
   /** Bring your own configured client (custom base URL, timeouts, …). Overrides `apiKey`. */
   client?: Pipe0;
   /**
-   * Ask the user before the tool runs (AI SDK tool approval). Every call spends
-   * credits in production, so consider enabling this in user-facing agents.
+   * Ask the user before the tool runs. Only needed on AI SDK 5 and 6.
+   *
+   * @deprecated On AI SDK 7, set `toolApproval` on `generateText`, `streamText`,
+   * or `ToolLoopAgent` instead, e.g. `toolApproval: { enrichPerson: 'user-approval' }`.
    */
   needsApproval?: boolean;
 }

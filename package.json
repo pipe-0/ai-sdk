@@ -1,6 +1,6 @@
 {
   "name": "@pipe0/ai-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "GTM data for agents: pipe0 tools for the Vercel AI SDK. Find people and enrich them with work emails, phone numbers, profiles and firmographics.",
   "license": "MIT",
   "author": "Florian Martens <florian_martens@outlook.de>",

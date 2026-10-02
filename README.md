@@ -53,15 +53,38 @@ Every tool (and `pipe0Tools`) accepts the same options:
 pipe0Tools({
   apiKey: "...",           // defaults to process.env.PIPE0_API_KEY
   environment: "sandbox",  // "production" (default) or "sandbox": free placeholder data for development
-  needsApproval: true,     // ask the user before each call (AI SDK tool approval)
 });
 ```
 
 You can also pass a configured `client` from [`@pipe0/client`](https://www.npmjs.com/package/@pipe0/client).
 
+## Approve calls before they run
+
+Every call spends credits in production. In agents where users trigger the calls, ask for approval with the AI SDK's `toolApproval`:
+
+```ts
+const result = await generateText({
+  model: "openai/gpt-5-mini",
+  prompt: "Get the work email of the CTO of Linear.",
+  tools: pipe0Tools(),
+  toolApproval: {
+    enrichPerson: "user-approval",
+  },
+  stopWhen: isStepCount(10),
+});
+```
+
+On AI SDK 5 and 6, which have no `toolApproval`, pass `needsApproval: true` to the tools instead. It is deprecated on AI SDK 7.
+
 ## Credits
 
-Tool calls run in `production` by default and spend pipe0 credits: roughly 0.1 credits per `findPeople` result and from 0.5 credits per value found by `enrichPerson`. Use `environment: "sandbox"` while building, and consider `needsApproval` in user-facing agents. See [pricing](https://www.pipe0.com/pricing).
+Tool calls run in `production` by default and spend pipe0 credits: roughly 0.1 credits per `findPeople` result and from 0.5 credits per value found by `enrichPerson`. Use `environment: "sandbox"` while building. See [pricing](https://www.pipe0.com/pricing).
+
+## Security and personal data
+
+Run the tools on your server and keep `PIPE0_API_KEY` out of client bundles. Anyone with the key can spend your credits.
+
+`findPeople` and `enrichPerson` return personal contact data. Make sure your use complies with the privacy and marketing rules that apply to you (for example GDPR or CAN-SPAM), and only show results to users allowed to see them.
 
 ## Beyond these tools
 
