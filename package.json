@@ -1,0 +1,70 @@
+{
+  "name": "@pipe0/ai-sdk",
+  "version": "0.1.0",
+  "description": "GTM data for agents: pipe0 tools for the Vercel AI SDK. Find people and enrich them with work emails, phone numbers, profiles and firmographics.",
+  "license": "MIT",
+  "author": "Florian Martens <florian_martens@outlook.de>",
+  "homepage": "https://www.pipe0.com/docs/sdks/ai-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pipe-0/ai-sdk.git"
+  },
+  "bugs": "https://github.com/pipe-0/ai-sdk/issues",
+  "keywords": [
+    "ai-sdk",
+    "vercel-ai",
+    "ai",
+    "agents",
+    "tools",
+    "enrichment",
+    "data-enrichment",
+    "email-finder",
+    "lead-generation",
+    "gtm",
+    "pipe0"
+  ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@pipe0/client": "^1.0.35"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "ai": "^7.0.127",
+    "tsdown": "^0.23.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3",
+    "zod": "^4.6.5"
+  },
+  "peerDependencies": {
+    "ai": ">=5.0.0",
+    "zod": "^3.25.76 || ^4.1.8"
+  }
+}
